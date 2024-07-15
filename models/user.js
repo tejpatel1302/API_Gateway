@@ -35,6 +35,7 @@ module.exports = (sequelize, DataTypes) => {
     sequelize,
     modelName: 'User',
   });
+  // using bcrypt we cannot be able to decrypt the password but we can compare it to verify the valid user.
   User.beforeCreate(function encrypt(user) {
     const encryptedPassword = bcrypt.hashSync(user.password, +ServerConfig.SALT_ROUNDS);
     user.password = encryptedPassword;
